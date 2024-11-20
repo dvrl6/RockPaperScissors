@@ -1,0 +1,1391 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Piedra, Papel o Tijera</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Viga&display=swap" rel="stylesheet">
+        <style>
+
+            :root{
+                --color-titulo: #3C096C;
+                --color-subtitulo: #5a189a;
+                --color-botones: #9d4edd;
+                --color-input: #E0AAFF;
+                --color-fondo: #f7ebfd;
+            }
+
+            body{
+                font-family: 'Viga', sans-serif;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                color: var(--color-fondo);
+                min-height: 100vh;
+            }
+
+            /* Estilo Pagina Principal */
+            .header {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container-titulo {
+                text-align: center;
+            }
+
+            .imagenes-juego {
+                display: flex;
+                justify-content: center;
+                padding: 0 1rem;
+            }
+
+            .imagenes-juego img {
+                width: 5rem;
+                height: 5rem;
+                padding: 0 3rem;
+            }
+
+            #titulo{
+                color: var(--color-titulo);
+                font-size: 4.5rem;
+                margin-bottom: 0px;
+            }
+
+            #subtitulo{
+                color: var(--color-subtitulo);
+                font-size: 2rem;
+                margin-top: 0;
+            }
+
+           #info-jugador input{
+                color: var(--color-input);
+            }
+
+            .info-jugador label[for="nombre"] {
+                color: black; 
+            }
+
+            #avatar-container {
+                display: grid;
+                grid-template-rows: repeat(2, 1fr);
+                justify-content: center;
+                gap: 20px;
+                max-height: 400px;
+            }
+
+            .avatar-row {
+                display: flex;
+                justify-content: center;
+                gap: 2em;
+            }
+
+            .avatar {
+                width: 6rem;
+                height: 6rem;
+                object-fit: cover;
+                cursor: pointer;
+            }
+
+            .avatar.selected {
+                border: 2px solid var(--color-input); 
+                box-shadow: 0 0 10px var(--color-titulo); 
+            }
+
+            .info-jugador {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 4rem; 
+            }
+
+            .info-jugador form {
+                margin-bottom: 1rem; 
+                font-size: 1.5rem;
+            }
+
+            .info-jugador form input {
+                width: 15rem; 
+                height: 2rem;
+                background-color: var(--color-input);
+            }
+
+            #titulo-avatar {
+                text-align: center;
+                font-size: 1.5rem;
+                color: black;
+                display: inline-block;
+            }
+
+           .botonesEleccionJuego {
+                display: flex;
+                justify-content: center;
+                margin-top: 5rem;
+            }
+
+            .botonesEleccionJuego button {
+                background-color: var(--color-botones);
+                margin: 0 10px;
+                margin-right: 4rem;
+                margin-bottom: 4rem;
+                padding: 10px 20px; 
+                border: none; 
+                border-radius: 4px; 
+                cursor: pointer; 
+                font-size: 2rem; 
+                font-weight: bold;
+                transition: background-color 0.3s ease; 
+            }
+
+            .botonesEleccionJuego button:last-child {
+                margin-right: 0; 
+            }
+
+            .botonesEleccionJuego button:focus {
+                outline: none; 
+                box-shadow: 0 0 5px var(--color-titulo); 
+            }
+
+            footer {
+                background-color: var(--color-titulo);
+                color: #fff;
+                padding: 20px 0;
+                margin-top: auto;
+            }
+
+            .footer-bottom {
+                text-align: center;
+                font-size: 14px;
+            }
+
+            .footer-bottom p {
+                margin: 0;
+                color: #fff;
+            }
+
+            
+            /* Estilos responsive */
+            @media (max-width: 768px) {
+                #titulo {
+                    font-size: 2.5rem;
+                }
+
+                #subtitulo {
+                    font-size: 1.2rem;
+                }
+
+                .imagenes-juego img {
+                    width: 3rem;
+                    height: 3rem;
+                    padding: 0 1.5rem;
+                }
+
+                 #avatar-container {
+                        grid-template-rows: repeat(4, 1fr);
+                    }
+
+                    .avatar-row {
+                        flex-wrap: wrap;
+                    }
+
+                    .avatar {
+                        width: 4rem;
+                        height: 4rem;
+                    }
+                }
+
+                .info-jugador form {
+                    font-size: 1rem;
+                }
+
+                .info-jogador form input {
+                    width: 10rem;
+                    height: 1.6rem;
+                }
+
+                #titulo-avatar {
+                    font-size: 1rem;
+                }
+
+                .botonesEleccionJuego button {
+                    padding: 6px 12px;
+                    font-size: 12px;
+                    margin-right: 2rem;
+                    margin-bottom: 2rem;
+                }
+
+                .footer-bottom {
+                    font-size: 10px;
+                }
+
+
+            @media (max-width: 480px) {
+                #titulo {
+                    font-size: 2rem;
+                }
+
+                #subtitulo {
+                    font-size: 1rem;
+                }
+
+                .imagenes-juego img {
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    padding: 0 1rem;
+                }
+
+                #avatar-container {
+                    grid-template-rows: repeat(6, 1fr);
+                }
+
+                .avatar {
+                    width: 3rem;
+                    height: 3rem;
+                }
+
+                .info-jugador form {
+                    font-size: 0.8rem;
+                }
+
+                .info-jogador form input {
+                    width: 8rem;
+                    height: 1.4rem;
+                }
+
+                #titulo-avatar {
+                    font-size: 0.8rem;
+                }
+
+                .botonesEleccionJuego button {
+                    padding: 4px 8px;
+                    font-size: 10px;
+                    margin-right: 1.5rem;
+                    margin-bottom: 1.5rem;
+                }
+
+                .footer-bottom {
+                    font-size: 8px;
+                }
+            }        
+
+
+            /* Estilo Juegos Existentes */
+            .game {
+                background-color: #f0f0f0;
+                padding: 10px;
+                margin: 5px;
+                display: inline-block;
+                color: black;
+                cursor: pointer;
+             }
+
+             #tituloJuegos{
+                color: var(--color-subtitulo);
+                text-align: center;
+             }
+
+             #total-games {
+                text-align: center;
+                font-size: 14px; 
+                font-weight: bold; 
+                color: var(--color-botones); 
+                margin-bottom: 10px; 
+           }
+
+           #search-form {
+                display: flex;
+                align-items: center;
+                justify-content: center; 
+                background-color: var(--color-input);
+                padding: 8px 12px; 
+                border-radius: 20px;
+                max-width: 400px; 
+                margin: 0 auto; 
+                margin-bottom: 2rem;
+           }
+
+            #search-form label {
+                font-size: 14px; 
+                font-weight: bold;
+                color: black;
+                margin-right: 8px;
+            }
+
+            #search-form input {
+                flex: 1;
+                border: none;
+                outline: none;
+                font-size: 14px; 
+                padding: 6px 8px; 
+                background-color: transparent;
+            }
+
+            #error-container{
+                text-align: center;
+                color:red; 
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+                font-size: 1rem;
+            }
+
+            .game.selected {
+                border: 2px solid #007bff; 
+                box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); 
+            }
+
+             #search-form,
+            #comenzarJuego {
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 1rem;
+            }
+
+            #comenzarJuego {
+            font-size: 16px;
+            font-weight: bold;
+            padding: 8px 16px;
+            background-color: var(--color-botones);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+         }
+
+                @media (max-width: 768px) {
+            .game {
+                padding: 8px;
+                margin: 4px;
+            }
+
+            #search-form {
+                max-width: 100%;
+                padding: 6px 10px;
+            }
+
+            #search-form label {
+                font-size: 12px;
+            }
+
+            #search-form input {
+                font-size: 12px;
+            }
+
+            #comenzarJuego {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game {
+                padding: 6px;
+                margin: 3px;
+            }
+
+            #tituloJuegos {
+                font-size: 18px;
+            }
+
+            #total-games {
+                font-size: 12px;
+            }
+
+            #search-form {
+                padding: 4px 8px;
+            }
+
+            #search-form label {
+                font-size: 10px;
+                margin-right: 6px;
+            }
+
+            #search-form input {
+                font-size: 10px;
+                padding: 4px 6px;
+            }
+
+            #comenzarJuego {
+                font-size: 12px;
+                padding: 4px 8px;
+            }
+        }
+
+
+         /* Estilo Sala de Juego */
+            #subtituloJugando{
+                color: var(--color-subtitulo);
+                font-size: 2rem;
+                margin-top: 0;
+                text-align: center;
+            }
+  
+            #game-id {
+                margin-bottom: 1rem;
+                text-align: center;
+                color: black;
+                font-size: 1.2rem;
+            }
+
+            #cantidad-jugadores {
+                font-size: 1.2rem;
+                margin-bottom: 2rem;
+                color: black;
+                text-align: center;
+            }
+
+            #pagina-nuevoJuego {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+             }
+
+             #errorJuego-container{
+                text-align: center;
+                color:red; 
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+                font-size: 1rem;
+            }
+
+
+                .imagenes-juegoActual {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                margin-top: 4rem;
+                padding: 0 1rem;
+              }
+
+                .imagenes-juegoActual img {
+                max-width: 100px;
+                width: 9rem;
+                height: 9rem;
+                padding: 0 3rem;
+                cursor: pointer;
+              }
+
+                .juegoImagen.selected {
+                border: 2px solid #007bff; 
+                box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); 
+            }
+
+            #aceptarMove {
+                display: block;
+                margin: 0 auto; 
+                background-color: var(--color-botones);
+                font-size: 16px;
+                font-weight: bold;
+                padding: 8px 16px;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-top: 4rem;
+             }
+
+             #notificationMessages{
+                    text-align: center;
+                    color: var(--color-titulo);
+                    font-size: 2rem;
+                }
+
+             .onlinePlayer-details-container {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 2rem;
+            }
+
+            .player-info {
+                margin-right: 20px;
+                text-align: right;
+                color: black;
+                font-size: 1.5rem;
+            }
+
+            .onlinePlayer-details-container .player-info {
+                margin-right: 0;
+                margin-left: 20px;
+                text-align: left;
+                color: black;
+            }
+
+            .player-avatar {
+                width: 7rem;
+                height: 7rem;
+            }
+
+            .otherPlayer-details-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 20px;
+                position: absolute;
+                right: 2rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .otherPlayer-details-container .player-info {
+                margin-right: 20px;
+                text-align: right;
+                color: black;
+                font-size: 1.5rem;
+            }
+
+            .otherPlayer-details-container .player-avatar {
+                width: 7rem;
+                height: 7rem;
+            }
+
+            @media (min-width: 768px) {
+                #subtituloJugando {
+                    font-size: 2rem;
+                }
+
+                #game-id {
+                    margin-bottom: 1rem;
+                    font-size: 1rem;
+                }
+
+                #cantidad-jugadores {
+                    font-size: 1.2rem;
+                    margin-bottom: 2rem;
+                }
+
+                .imagenes-juegoActual {
+                flex-wrap: wrap; /* Envuelve los elementos en múltiples filas si es necesario */
+                justify-content: center; /* Centra los elementos horizontalmente */
+                gap: 10px; /* Reduce el espacio entre los elementos */
+                margin-top: 2rem; /* Reduce el margen superior */
+                padding: 0; /* Elimina el padding lateral */
+            }
+
+            .imagenes-juegoActual img {
+                max-width: 80px; 
+                width: 7rem;
+                height: 7rem; 
+                padding: 0 2rem; 
+            }
+
+                #aceptarMove {
+                    margin-top: 4rem;
+                }
+
+
+                .onlinePlayer-details-container {
+                    left: 2rem;
+                }
+
+                .player-info {
+                    font-size: 1.5rem;
+                }
+
+                .player-avatar {
+                    width: 7rem;
+                    height: 7rem;
+                }
+
+                .otherPlayer-details-container {
+                    right: 2rem;
+                }
+
+                .otherPlayer-details-container .player-info {
+                    font-size: 1.5rem;
+                }
+
+                .otherPlayer-details-container .player-avatar {
+                    width: 7rem;
+                    height: 7rem;
+                } 
+                }
+
+                @media (max-width: 480px) {
+
+                .imagenes-juegoActual {
+                    gap: 12px; 
+                    margin-top: 2.5rem; 
+                    padding: 0 0.6rem; 
+                }
+
+                .imagenes-juegoActual img {
+                    max-width: 80px;
+                    width: 7rem; 
+                    height: 7rem; 
+                    padding: 0 2rem; 
+                }
+                }
+
+        </style>
+    </head>
+    <body>
+        <div class = "header">
+            <div class = "container-titulo">
+                <h1 id="titulo">Piedra, Papel o Tijera</h1>
+                <h2 id="subtitulo">Online</h2>
+            </div>
+        </div>
+
+        <!-- Pagina Principal -->
+    <div id="pagina-principal" style="display: block;">
+        <div class = "imagenes-juego">
+            <img src="https://www.codingnepalweb.com/demos/rock-paper-scissors-game-html-css-javascript/images/rock.png">
+            <img src="https://www.codingnepalweb.com/demos/rock-paper-scissors-game-html-css-javascript/images/paper.png">
+            <img src="https://www.codingnepalweb.com/demos/rock-paper-scissors-game-html-css-javascript/images/scissors.png">
+        </div>
+        <div class = "info-jugador">
+            <form>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" autocomplete="off" required>
+                <br>
+            </form>
+            <div id = "avatar-container">
+                <h5 id="titulo-avatar">Elige tu Avatar</h5>
+            </div>
+        </div>
+
+        <div class = "botonesEleccionJuego">
+            <button type="button" id="newGameButton">Crea un Nuevo Juego</button>
+            <button type="button" id="existingGameButton">Unirse a Partida Existente</button>
+        </div>
+    </div>
+
+        <!-- Pagina Juegos Existentes -->
+    <div id = "pagina-juegos" style="display: none;">
+        <div class = "imagenes-juego">
+            <img src="https://www.codingnepalweb.com/demos/rock-paper-scissors-game-html-css-javascript/images/rock.png">
+            <img src="https://www.codingnepalweb.com/demos/rock-paper-scissors-game-html-css-javascript/images/paper.png">
+            <img src="https://www.codingnepalweb.com/demos/rock-paper-scissors-game-html-css-javascript/images/scissors.png">
+        </div>
+        <h1 id="tituloJuegos">Juegos Existentes</h1>
+        <div id="total-games"></div>
+        <form id="search-form">
+            <label for="search-input">Buscar</label>
+            <input type="text" id="search-input" name="search-input" placeholder="Ingresa tu búsqueda" autocomplete="off">
+          </form>
+          <div id = "error-container"></div>
+        <button type="button" id="comenzarJuego">Comenzar</button>
+        <div id="games-container"></div>
+      </div>
+    </div>
+
+        <!-- Pagina Nuevo Juego -->
+    <div id = "pagina-nuevoJuego" style="display: none">
+           <div id="game-id"></div>
+           <div id="cantidad-jugadores"></div>
+           <div id="notificationMessages"></div>
+            <div class = "imagenes-juegoActual">
+                <img class="juegoImagen" id="R" src="https://www.codingnepalweb.com/demos/rock-paper-scissors-game-html-css-javascript/images/rock.png">
+                <img class="juegoImagen" id="P" src="https://www.codingnepalweb.com/demos/rock-paper-scissors-game-html-css-javascript/images/paper.png">
+                <img class="juegoImagen" id="S" src="https://www.codingnepalweb.com/demos/rock-paper-scissors-game-html-css-javascript/images/scissors.png">
+            </div>
+            <button type="button" id="aceptarMove">Aceptar</button>
+                <div id="errorJuego-container"></div>
+                <div id= "detallesParticipante"></div>
+                <div id = "onlinePlayerDetails"></div>
+                <div id = "otherPlayerDetails"></div>
+            </div>
+    </div>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>Diana Rodriguez. Todos los derechos reservados.</p>
+          </div>
+    </footer>
+
+        <script>
+            const ApiUrl = 'https://parcial-202425-production.up.railway.app';
+            let canCreateGame = false;
+            let gameId; 
+            let selectedAvatar;
+            let playerName;
+            let playerData;
+            let onlinePlayer;
+            let movimientoElegido;
+            let otherPlayer;
+            let games = [];
+            let eventSource;
+
+            //Abre la pagina de juegos existentes
+            document.getElementById('existingGameButton').addEventListener('click', () => {
+                const nameInput = document.getElementById('nombre');
+                canCreateGame = nameInput.value.trim() !== '' && document.querySelectorAll('.avatar.selected').length > 0;
+                if (canCreateGame) {
+                document.getElementById('pagina-principal').style.display = 'none';
+                document.getElementById('pagina-juegos').style.display = 'block';
+                fetchGames();
+                } else {
+                alert('Debes seleccionar un avatar y escribir tu nombre.');   
+                }
+            });
+
+            //elige un juego existente y le asigna el jugador         
+
+             document.getElementById('comenzarJuego').addEventListener('click', () => {
+            const selectedGameElement = document.querySelector('.game.selected');
+            gameId = selectedGameElement.getAttribute('data-game-id');
+            selectedAvatar = document.querySelector('.avatar.selected');
+            playerName = document.getElementById('nombre').value;
+            playerData = {
+                name: playerName,
+                avatar: selectedAvatar.src
+            };
+
+            addPlayerToGame(gameId, playerData)
+                .then(() => {
+                return Promise.all([
+                    getOtherPlayerId(gameId, onlinePlayer.id),
+                ]);
+                })
+                .then(([otherPlayerId]) => {
+                    openNotificationSocket(gameId),
+                showPlayersDetails(gameId, onlinePlayer.id, otherPlayerId);
+                showGamePlayersCount(gameId);
+                displayID(gameId);
+                document.getElementById('pagina-juegos').style.display = 'none';
+                document.getElementById('pagina-nuevoJuego').style.display = 'block';
+                })
+                .catch(error => {
+                showErrorMessage(error.message);
+                document.getElementById('comenzarJuego').disabled = true;
+                });
+            });
+
+            
+            //crea un nuevo juego y le asigna el jugador que lo creo
+              document.getElementById('newGameButton').addEventListener('click', () => {
+                    const nameInput = document.getElementById('nombre');
+                    canCreateGame = nameInput.value.trim() !== '' && document.querySelectorAll('.avatar.selected').length > 0;
+                    if (canCreateGame) {
+                        document.getElementById('pagina-principal').style.display = 'none';
+                        document.getElementById('pagina-nuevoJuego').style.display = 'block';
+                        selectedAvatar = document.querySelector('.avatar.selected');
+                        playerName = document.getElementById('nombre').value;
+                        playerData = {
+                            name: playerName,
+                            avatar: selectedAvatar.src
+                        };
+                        createGame()
+                        .then(data => {
+                            gameId = data.id;
+                            addPlayerToGame(gameId, playerData)
+                            .then(() => {
+                                openNotificationSocket(gameId),
+                                showPlayerDetails(gameId, onlinePlayer.id);
+                                showGamePlayersCount(gameId);
+                                displayID(gameId);
+                            })
+                            .catch(error => {
+                                console.error('Error adding player to game:', error);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error creating game:', error);
+                        });
+                    } else {
+                        alert('Debes seleccionar un avatar y escribir tu nombre.');
+                    }
+                }); 
+
+
+            const jugadaImages = document.querySelectorAll('.juegoImagen');
+                jugadaImages.forEach(juegoImagen => {
+                juegoImagen.addEventListener('click', () => selectJugada(juegoImagen));
+                });
+
+
+            //CUANDO LE DE AL BOTON ACEPTAR SE ACTUALIZAN VARIAS COSAS
+                 document.getElementById('aceptarMove').addEventListener('click', () => {
+                playMove(gameId, onlinePlayer.id, movimientoElegido)
+                    .then(() => {
+                    return getOtherPlayerId(gameId, onlinePlayer.id);
+                    })
+                    .then((otherPlayerId) => {
+                    showPlayersDetails(gameId, onlinePlayer.id, otherPlayerId);
+                    showGamePlayersCount(gameId);
+                    })
+                    .catch(error => {
+                    showErrorMessageJuego(error.message);
+                    });
+                }); 
+
+            const searchInput = document.getElementById('search-input');
+                searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value;
+                const filteredGames = filterGames(games, searchTerm);
+                renderGames(filteredGames);
+           });
+
+            //FUNCIONES. COMUNICACION CON LA API.
+
+            //Obtengo, muestro y organizo los avatares disponibles
+            function fetchAvatars() {
+                const operation = {
+                    method: 'GET',
+                    uri: '/games/avatars',
+                    description: 'Lista una serie de avatares que pueden ser usados al crear el juego.'
+                };
+
+                fetch(`${ApiUrl}${operation.uri}`, {
+                    method: operation.method,
+                    headers: {
+                    'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    renderAvatars(data);
+                })
+                .catch(error => {
+                    console.error(`Error en ${operation.description}:`, error);
+                });
+            }
+
+            function renderAvatars(avatars) {
+                const avatarContainer = document.getElementById('avatar-container');
+
+                const half = Math.ceil(avatars.length / 2);
+                const topAvatars = avatars.slice(0, half);
+                const bottomAvatars = avatars.slice(half);
+
+                const topRow = document.createElement('div');
+                topRow.classList.add('avatar-row');
+                topAvatars.forEach(avatar => {
+                     const avatarElement = document.createElement('img');
+                     avatarElement.src = avatar;
+                     avatarElement.alt = 'Avatar';
+                     avatarElement.classList.add('avatar');
+                     avatarElement.addEventListener('click', () => selectAvatar(avatarElement));
+                     topRow.appendChild(avatarElement);
+                });
+                avatarContainer.appendChild(topRow);
+                    
+                 const bottomRow = document.createElement('div');
+                 bottomRow.classList.add('avatar-row');
+                 bottomAvatars.forEach(avatar => {
+                        const avatarElement = document.createElement('img');
+                        avatarElement.src = avatar;
+                        avatarElement.alt = 'Avatar';
+                        avatarElement.classList.add('avatar');
+                        avatarElement.addEventListener('click', () => selectAvatar(avatarElement));
+                        bottomRow.appendChild(avatarElement);
+                 });
+                 avatarContainer.appendChild(bottomRow);
+            }
+
+            function selectAvatar(selectedAvatar) {
+                const avatars = document.querySelectorAll('.avatar');
+                avatars.forEach(avatar => avatar.classList.remove('selected'));
+                selectedAvatar.classList.add('selected');
+            }
+
+            fetchAvatars();
+
+            // Obtengo y muestro la lista de juegos existentes para que un jugador se una
+            function fetchGames() {
+                const operation = {
+                    method: 'GET',
+                    uri: '/games',
+                    description: 'Lista todos los juegos creados actualmente en el servidor.'
+                };
+
+                fetch(`${ApiUrl}${operation.uri}`, {
+                    method: operation.method,
+                    headers: {
+                    'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const totalGames = data.length;
+                    games = data;
+                    renderGames(data);
+                    renderTotalGames(totalGames);
+                })
+                .catch(error => {
+                    console.error(`Error en ${operation.description}:`, error);
+                });
+            }
+
+            function renderGames(games) {
+                const gamesContainer = document.getElementById('games-container');
+                gamesContainer.innerHTML = ''; 
+
+                if (Array.isArray(games) && games.length > 0) {
+                    games.forEach(game => {
+                    const gameElement = document.createElement('div');
+                    gameElement.classList.add('game');
+                    gameElement.textContent = game.id; 
+                    gameElement.dataset.gameId = game.id; 
+                    gameElement.addEventListener('click', () => selectGame(gameElement, games));
+                    gamesContainer.appendChild(gameElement);
+                    });
+                }
+             }
+
+             function filterGames(games, searchTerm) {
+                return games.filter(game => {
+                    return game.id.toLowerCase().includes(searchTerm.toLowerCase());
+            });
+            }
+
+             function renderTotalGames(totalGames) {
+                const totalGamesElement = document.getElementById('total-games');
+                totalGamesElement.textContent = `Total de Partidas Existentes: ${totalGames}`;
+          }
+
+
+          //Creo un nuevo juego
+                    function createGame() {
+                    const operation = {
+                        method: 'POST',
+                        uri: '/games',
+                        description: 'Crea un nuevo juego de piedra, papel o tijera'
+                    };
+
+                    return fetch(`${ApiUrl}${operation.uri}`, {
+                        method: operation.method,
+                        headers: {
+                        'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                        return response.json();
+                        } else {
+                        return response.json().then(data => {
+                            const error = new Error(`Error en ${operation.description}: ${data.result}`);
+                            error.status = response.status;
+                            throw error;
+                        });
+                        }
+                    })
+                    .then(data => {
+                        return data;
+                    })
+                    .catch(error => {
+                        console.error(`Error en ${operation.description}:`, error);
+                        throw error;
+                    });
+                    }
+            
+
+            //Agrego jugadores a un juego por su ID      
+                function addPlayerToGame(gameId, playerData) {
+                    const operation = {
+                        method: 'POST',
+                        uri: `/games/${gameId}/players`,
+                        description: 'Agrega un nuevo jugador a un juego'
+                    };
+
+                    return fetch(`${ApiUrl}${operation.uri}`, {
+                        method: operation.method,
+                        headers: {
+                        'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(playerData)
+                    })
+                    .then(response => {
+                        if (response.status === 201) {
+                        return response.json();
+                        } else if (response.status === 409) {
+                        // Manejo del error 409 Conflict
+                        return response.json()
+                            .then(data => {
+                            const errorMessage = "La sala esta llena. Elija otro!";
+                            showErrorMessage(errorMessage);
+                            return Promise.reject(new Error(errorMessage));
+                            });
+                        } else {
+                        return response.json()
+                            .then(data => {
+                            const errorMessage = `Error añadiendo jugador a partida: ${data.message}`;
+                            showErrorMessage(errorMessage);
+                            return Promise.reject(new Error(errorMessage));
+                            });
+                        }
+                    })
+                    .then(newPlayer => {
+                        onlinePlayer = newPlayer;
+                        return newPlayer;
+                    })
+                    .catch(error => {
+                        console.error(`Error en ${operation.description}:`, error);
+                        return Promise.reject(error);
+                    });
+                    }
+
+            //marca el juego existente seleccionado por el player Online
+            function selectGame(gameElement, games) {
+                    const gameElements = document.querySelectorAll('.game');
+                    gameElements.forEach(game => game.classList.remove('selected'));
+                    gameElement.classList.add('selected');
+                    document.getElementById('comenzarJuego').disabled = false;
+                    const gameId = gameElement.dataset.gameId;
+                    console.log(gameElement);
+            }
+
+            //Detalles de un juego en particular
+            function getGameDetails(gameId) {
+                const operation = {
+                    method: 'GET',
+                    uri: `/games/${gameId}`,
+                    description: 'Obtener detalles de un juego'
+                };
+
+                return fetch(`${ApiUrl}${operation.uri}`, {
+                    method: operation.method,
+                    headers: {
+                    'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                    return response.json();
+                    } else {
+                    return response.json().then(data => {
+                        const error = new Error(`Error en ${operation.description}: ${data.message || 'No se encontró el juego'}`);
+                        error.status = response.status;
+                        throw error;
+                    });
+                    }
+                })
+                .then(data => {
+                    return data;
+                })
+                .catch(error => {
+                    console.error(`Error en ${operation.description}:`, error);
+                    throw error;
+                });
+                }
+
+             //Lista a los jugadores de un Juego
+               function getGamePlayers(gameId) {
+                    const operation = {
+                        method: 'GET',
+                        uri: `/games/${gameId}/players`,
+                        description: 'Obtiene la lista de jugadores de un juego'
+                    };
+
+                    return fetch(`${ApiUrl}${operation.uri}`, {
+                        method: operation.method,
+                        headers: {
+                        }
+                    })
+                    .then(response => {
+                        if (response.status === 200) {
+                        return response.json();
+                        } else if (response.status === 404) {
+                        return response.json()
+                            .then(error => {
+                            throw new Error(`Error obteniendo jugadores: ${error.message}`);
+                            });
+                        } else {
+                        throw new Error(`Error obteniendo jugadores: ${response.status} - ${response.statusText}`);
+                        }
+                    })
+                    .then(players => {
+                        return players;
+                    })
+                    .catch(error => {
+                        console.error(`Error en ${operation.description}:`, error);
+                        alert(`Error: ${error.message}`);
+                        throw error;
+                    });
+                    }
+
+
+               function displayGamePlayersCount(playersCount) {
+                 const playersCountElement = document.getElementById('cantidad-jugadores');
+                 playersCountElement.textContent = `Número de jugadores: ${playersCount}`;
+            }
+
+            //muestra cantidad de jugadores en una sala
+                function showGamePlayersCount(gameId) {
+                getGamePlayers(gameId)
+                    .then(players => {
+                    displayGamePlayersCount(players.length);
+                    })
+                    .catch(error => {
+                    console.error('Error al obtener los jugadores:', error);
+                    });
+                }
+
+               //Obtiene los detalles de un jugador
+               function getPlayerDetails(gameId, playerId) {
+                    const operation = {
+                        method: 'GET',
+                        uri: `/games/${gameId}/players/${playerId}`,
+                        description: 'Obtener detalles de un jugador'
+                    };
+
+                    return fetch(`${ApiUrl}${operation.uri}`, {
+                        method: operation.method,
+                        headers: {
+                        'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                        return response.json();
+                        } else {
+
+                        return response.json()
+                        .then(data => {
+                            let errorMessage;
+                            if (response.status === 404) {
+                                console.log(data.message);
+                            if (data.message.includes('game')) {
+                                errorMessage = 'No se encontró el juego';
+                            } else {
+                                errorMessage = 'No se encontró el jugador';
+                            }
+                            } else {
+                            errorMessage = data.message || 'Error al obtener los detalles del jugador';
+                            }
+                            const error = new Error(`Error en ${operation.description}: ${errorMessage}`);
+                            error.status = response.status;
+                            throw error;
+                        });
+                        }
+                    })
+                    .then(data => {
+                        return data;
+                    })
+                    .catch(error => {
+                        console.error(`Error en ${operation.description}:`, error);
+                        throw error;
+                    });
+                    }
+
+
+                  //muestro los dos jugadores en pantalla
+                   function showPlayersDetails(gameId, onlinePlayerId, otherPlayerId) {
+                        const onlinePlayerDetailsContainer = document.querySelector('#onlinePlayerDetails');
+                        onlinePlayerDetailsContainer.innerHTML = '';
+                        const otherPlayerDetailsContainer = document.querySelector('#otherPlayerDetails');
+                        //otherPlayerDetailsContainer.innerHTML = '';
+                        getPlayerDetails(gameId, onlinePlayerId)
+                            .then(onlinePlayerDetails => {
+                            displayOnlinePlayerDetails(onlinePlayerDetails, onlinePlayerDetailsContainer);
+                            })
+                            .catch(error => {
+                            console.error('Error al obtener los detalles del jugador en línea:', error);
+                            });
+
+                        getPlayerDetails(gameId, otherPlayerId)
+                            .then(otherPlayerDetails => {
+                            if (otherPlayerDetails) {
+                                displayOtherPlayerDetails(otherPlayerDetails, otherPlayerDetailsContainer);
+                            } else {
+                                otherPlayerDetailsContainer.innerHTML = 'Esperando que el otro jugador se una a la partida...';
+                            }
+                            })
+                            .catch(error => {
+                            console.error('Error al obtener los detalles del otro jugador:', error);
+                            });
+                        } 
+
+                    //para mostrar detalles de cada jugador en pantalla
+                   function showPlayerDetails(gameId, playerId) {
+                        const playerDetailsContainer = document.querySelector('#detallesParticipante');
+                         getPlayerDetails(gameId, playerId)
+                        .then(playerDetails => {
+                        displayOnlinePlayerDetails(playerDetails, playerDetailsContainer);
+                        })
+                        .catch(error => {
+                        console.error('Error al obtener los detalles del jugador:', error);
+                        });
+                 }  
+
+                 function displayOnlinePlayerDetails(playerDetails, containerOnline) {
+                    const onlinePlayerDetailsHtml = `
+                        <div class="onlinePlayer-details-container">
+                        <img src="${playerDetails.avatar}" alt="${playerDetails.name}'s avatar" class="player-avatar">
+                        <div class="player-info">
+                            <h2>Tú: ${playerDetails.name}</h2>
+                            <p>ID: ${playerDetails.id}</p>
+                            <p>Victorias: ${playerDetails.wins}</p>
+                            <p>Pérdidas: ${playerDetails.loses}</p>
+                            <p>Empates: ${playerDetails.ties}</p>
+                        </div>
+                        </div>
+                    `;
+                    containerOnline.innerHTML = onlinePlayerDetailsHtml;
+                    }
+
+                    function displayOtherPlayerDetails(playerDetails, containerOther) {
+                    const otherPlayerDetailsHtml = `
+                        <div class="otherPlayer-details-container">
+                        <img src="${playerDetails.avatar}" alt="${playerDetails.name}'s avatar" class="player-avatar">
+                        <div class="player-info">
+                            <h2>Oponente: ${playerDetails.name}</h2>
+                            <p>ID: ${playerDetails.id}</p>
+                            <p>Victorias: ${playerDetails.wins}</p>
+                            <p>Pérdidas: ${playerDetails.loses}</p>
+                            <p>Empates: ${playerDetails.ties}</p>
+                        </div>
+                        </div>
+                    `;
+                    containerOther.innerHTML = otherPlayerDetailsHtml;
+                    }
+
+                //Realiza las jugadas en el servidor
+                function playMove(gameId, playerId, move) {
+                    const operation = {
+                        method: 'PUT',
+                        uri: `/games/${gameId}/players/${playerId}/play`,
+                        description: 'Hacer un movimiento en el juego'
+                    };
+
+                    if (!["R", "P", "S"].includes(move)) {
+                        showErrorMessageJuego("Jugada Inválida. Debe ser 'R', 'P', o 'S'.");
+                        return Promise.reject(new Error("Jugada Inválida. Debe ser 'R', 'P', or 'S'."));
+                    }
+
+                    return fetch(`${ApiUrl}${operation.uri}`, {
+                        method: operation.method,
+                        headers: {
+                        'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ next: move })
+                    })
+                    .then(response => {
+                        if (response.status === 404 || response.status === 400) {
+                        return response.json()
+                            .then(error => {
+                            let errorMessage;
+                            if (response.status === 400) {
+                                errorMessage = "No puedes realizar la jugada hasta que entre otro jugador";
+                            } else {
+                                errorMessage = `Error: ${error.message}`;
+                            }
+                            showErrorMessageJuego(errorMessage);
+                            return Promise.reject(new Error(errorMessage));
+                            });
+                        } else if (response.status === 200) {
+                        return response.json()
+                            .then(result => {
+                            return result;
+                            console.log(result);
+                            });
+                        } else {
+                        const errorMessage = `Unexpected response from server: ${response.status}`;
+                        showErrorMessageJuego(errorMessage);
+                        return Promise.reject(new Error(errorMessage));
+                        }
+                    })
+                    .catch(error => {
+                        console.error(`Error in ${operation.description}:`, error);
+                        return Promise.reject(error);
+                    });
+                    }
+
+
+                //NOTIFICACIONES CON SOCKETS SSE
+
+               function openNotificationSocket(gameId) {
+                if (!eventSource) {
+                    const notificationsUrl = `${ApiUrl}/games/${gameId}/notifications`;
+                    eventSource = new EventSource(notificationsUrl);
+
+                    eventSource.onmessage = function(event) {
+                    const notification = JSON.parse(event.data);
+
+                    if (notification.id === gameId) {
+                        handleNotification(event.data);
+                        console.log('Received notification:', notification);
+                    }
+                    };
+
+                    eventSource.onerror = function(event) {
+                    console.error('Error with notification socket:', event);
+                    eventSource.close();
+                    };
+                }
+                return eventSource;
+               }
+
+               //muestra notificaciones del juego en pantalla
+                function handleNotification(notification) {
+                const notificationData = JSON.parse(notification);
+                const { id, message, players, id2, message2, winner, id3, message3, playedBy, waitingFor } = notificationData;
+
+                const notificationElement = document.getElementById('notificationMessages');
+
+                // Actualiza la interfaz de usuario según el tipo de notificación
+                if (message && message.includes("wins")) {
+                    notificationElement.textContent = `¡El jugador ${winner.id} ha ganado!`;
+                } else if (message && message.includes("tie")) {
+                    notificationElement.textContent = "¡El juego ha terminado en empate!";
+                } else if (message && message.includes("has joined the game")) {
+                    notificationElement.textContent = "Otro participante se ha unido! Haz tu jugada";
+                } else if (playedBy && waitingFor) {
+                    if (playedBy === onlinePlayer.id) {
+                        notificationElement.textContent = "Esperando la jugada del Oponente...";
+                    } else {
+                    notificationElement.textContent = "Tu turno de jugar";
+                    }
+                } else {
+                    console.log('Notificación desconocida:', notificationData);
+                }
+                }
+
+                //Marca la jugada seleccionada por el player
+                function selectJugada(selectedPlay) {
+                jugadaImages.forEach(juegoImagen => juegoImagen.classList.remove('selected'));
+                selectedPlay.classList.add('selected');
+                movimientoElegido = selectedPlay.id;
+                }
+            
+                //muestro el id del juego en pantalla
+                function displayID(gameId){
+                    const gameIdElement = document.getElementById('game-id');
+                    gameIdElement.textContent = `ID del juego: ${gameId}`;
+                }
+
+                //consigo el id del otro jugador de un juego
+                function getOtherPlayerId(gameId, onlinePlayerId) {
+                    return getGameDetails(gameId)
+                        .then(gameDetails => {
+                        const players = gameDetails.players;
+                        if (!players || players.length === 0) {
+                            return Promise.reject(new Error('No hay jugadores en el juego'));
+                        }
+                        const otherPlayer = players.find(player => player.id !== onlinePlayerId);
+                        if (!otherPlayer) {
+                            return Promise.reject(new Error('No se pudo encontrar al otro jugador'));
+                        }
+                        return otherPlayer.id;
+                        })
+                        .catch(error => {
+                        console.error("Error al obtener el ID del otro jugador:", error);
+                        throw error;
+                        });
+        }
+    
+                //muestra mensajes de error en pantalla
+                function showErrorMessage(errorMessage) {
+                        const errorContainer = document.getElementById('error-container');
+                        errorContainer.textContent = errorMessage;
+                        errorContainer.style.display = 'block'; 
+                }
+
+                function showErrorMessageJuego(errorMessage) {
+                        const errorContainer = document.getElementById('errorJuego-container');
+                        errorContainer.textContent = errorMessage;
+                        errorContainer.style.display = 'block'; 
+                }
+
+        </script>
+    </body>
+    </html>
